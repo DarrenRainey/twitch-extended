@@ -13,6 +13,6 @@
 if (window.top == window) {
 	var TwitchExtended = document.createElement('script');
 	TwitchExtended.type = 'text/javascript';
-	TwitchExtended.src = 'http://twitch-extended.googlecode.com/files/twitchextended.js';
+	TwitchExtended.src = 'http://twitch-extended.googlecode.com/svn/twitch-extended.js';
 	document.body.appendChild(TwitchExtended);
 }
