@@ -97,7 +97,7 @@ switch(jQuery('html').attr('lang')) {
 			var TEXT_LAST_HOUR = "o";
 					
 			var TEXT_CHAT_DELETED = "Usuni&#281;te wiadomo&#347;ci w chacie";
-			var TEXT_CHAT_DELETED_HOVER = "Wiadomo&#347;ci b&#281;d&#261; pó&#322;prze&#378;roczyste";
+			var TEXT_CHAT_DELETED_HOVER = "Wiadomo&#347;ci b&#281;d&#261; p&#243;&#322;prze&#378;roczyste";
 			
 			var TEXT_CHAT_REPLY = "Szybka odpowied&#378;";
 			var TEXT_CHAT_REPLY_HOVER = "Przyciski b&#281;d&#261; wy&#347;wietlane w chacie";
@@ -110,7 +110,7 @@ switch(jQuery('html').attr('lang')) {
 			
 			var TEXT_LOAD_ARCHIVE = "Za&#322;aduj archiwum";
 			var TEXT_ARCHIVE = "Archiwum";
-			var TEXT_HIGLIGHTS = "Wyró&#380;nione filmy";
+			var TEXT_HIGLIGHTS = "Wyr&#243;&#380;nione filmy";
 		break; 
 		
 		default :
@@ -684,7 +684,7 @@ switch(jQuery('html').attr('lang')) {
 			
 			TEXT_TWE_IMG_ALT = "Konfiguracja Twitch Extended";
 			
-			TEXT_DONATE = "Podoba Ci si&#281; to rozszerzenie? Mo&#380;esz wspomóc mnie poprzez darowizn&#281;.";
+			TEXT_DONATE = "Podoba Ci si&#281; to rozszerzenie? Mo&#380;esz wspom&#243;c mnie poprzez darowizn&#281;.";
 			
 			TEXT_NIGHTM_HEAD = "Konfiguracja trybu nocnego";
 			TEXT_NIGHTM_TITLE = "Tryb nocny";
@@ -693,7 +693,7 @@ switch(jQuery('html').attr('lang')) {
 			TEXT_CHAT_HEAD = "Konfiguracja czatu";
 			TEXT_CHAT_DELETED = "Pokazuj usuni&#281;te wiadomo&#347;ci na czacie";
 			TEXT_CHAT_REPLY = "Pokazuj przycisk szybkiej odpowiedzi na czacie";
-			TEXT_CHAT_HIGHLIGHT = "Podkre&#347;laj wiadomo&#347;ci od (oddzielaj nazwy u&#380;ytkowników przecinkiem \",\")";
+			TEXT_CHAT_HIGHLIGHT = "Podkre&#347;laj wiadomo&#347;ci od (oddzielaj nazwy u&#380;ytkownik&#243;w przecinkiem \",\")";
 			
 			TEXT_DISP_HEAD = "Konfiguracja wy&#347;wieltania";
 			TEXT_DISP_SUGCHANN = "Ukryj sugerowane kana&#322;y";
