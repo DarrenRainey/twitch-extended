@@ -108,9 +108,9 @@ switch(jQuery('html').attr('lang')) {
 			var TEXT_UPDATE_INFO = "Aktualizuj informacje o streamie";
 			var TEXT_UPDATE_INFO_HOVER = "B&#281;d&#261; aktualizowane co 1 minut&#281;";
 			
-			var TEXT_LOAD_ARCHIVE = "Za≥aduj archiwum";
+			var TEXT_LOAD_ARCHIVE = "Za&#322;aduj archiwum";
 			var TEXT_ARCHIVE = "Archiwum";
-			var TEXT_HIGLIGHTS = "WyrÛønione filmy";
+			var TEXT_HIGLIGHTS = "WyrÛ&#380;nione filmy";
 		break; 
 		
 		default :
@@ -676,44 +676,44 @@ switch(jQuery('html').attr('lang')) {
 			TEXT_EXT_NAME = "Twitch Extended";
 			//TEXT_EXT_VER = "1.2";
 
-			TEXT_REFRESH_B = "Odúwieø info o streamie";
+			TEXT_REFRESH_B = "Od&#347;wie&#380; info o streamie";
 			TEXT_NIGHTM_B = "Tryb nocny";
-			TEXT_BIGSCREEN_B = "Duøy ekran";
-			TEXT_USERDISPLAY_B = "Tryb uøytkownika";
-			TEXT_BIGSCREEN_OFF_B = "Wy≥πcz duøy ekran | [ESC]";
+			TEXT_BIGSCREEN_B = "Du&#380;y ekran";
+			TEXT_USERDISPLAY_B = "Tryb u&#380;ytkownika";
+			TEXT_BIGSCREEN_OFF_B = "Wy&#322;&#261;cz du&#380;y ekran | [ESC]";
 			
 			TEXT_TWE_IMG_ALT = "Konfiguracja Twitch Extended";
 			
-			TEXT_DONATE = "Podoba Ci siÍ to rozszerzenie? Moøesz wspomÛc mnie poprzez darowiznÍ.";
+			TEXT_DONATE = "Podoba Ci si&#281; to rozszerzenie? Mo&#380;esz wspomÛc mnie poprzez darowizn&#281;.";
 			
 			TEXT_NIGHTM_HEAD = "Konfiguracja trybu nocnego";
 			TEXT_NIGHTM_TITLE = "Tryb nocny";
-			TEXT_NIGHTM_BG = "Zachowaj oryginalne t≥o kana≥u";
+			TEXT_NIGHTM_BG = "Zachowaj oryginalne t&#322;o kana&#322;u";
 			
 			TEXT_CHAT_HEAD = "Konfiguracja czatu";
-			TEXT_CHAT_DELETED = "Pokazuj usuniÍte wiadomoúci na czacie";
+			TEXT_CHAT_DELETED = "Pokazuj usuni&#281;te wiadomo&#347;ci na czacie";
 			TEXT_CHAT_REPLY = "Pokazuj przycisk szybkiej odpowiedzi na czacie";
-			TEXT_CHAT_HIGHLIGHT = "Podkreúlaj wiadomoúci od (oddzielaj nazwy uøytkownikÛw przecinkiem \",\")";
+			TEXT_CHAT_HIGHLIGHT = "Podkre&#347;laj wiadomo&#347;ci od (oddzielaj nazwy u&#380;ytkownikÛw przecinkiem \",\")";
 			
-			TEXT_DISP_HEAD = "Konfiguracja wyúwieltania";
-			TEXT_DISP_SUGCHANN = "Ukryj sugerowane kana≥y";
-			TEXT_DISP_TABS = "Ukryj zak≥adki poniøej (informacje i nagrania)";
-			TEXT_DISP_TABS_LIMIT = "Ogranicz wysokoúÊ zak≥adek (mogπ byÊ problemy jeúli flash jest osadzony)";
-			TEXT_DISP_FB = "Ukryj pasek po≥πczenia z Facebookiem";
+			TEXT_DISP_HEAD = "Konfiguracja wy&#347;wieltania";
+			TEXT_DISP_SUGCHANN = "Ukryj sugerowane kana&#322;y";
+			TEXT_DISP_TABS = "Ukryj zak&#322;adki poni&#380;ej (informacje i nagrania)";
+			TEXT_DISP_TABS_LIMIT = "Ogranicz wysoko&#347;&#263; zak&#322;adek (mog&#261; by&#263; problemy je&#347;li flash jest osadzony)";
+			TEXT_DISP_FB = "Ukryj pasek po&#322;&#261;czenia z Facebookiem";
 			
-			TEXT_BIGSCR_HEAD = "Konfiguracja duøego ekranu";
-			TEXT_BIGSCR_CHATW = "SzerokoúÊ czatu (domyúlnie 350px)";
+			TEXT_BIGSCR_HEAD = "Konfiguracja du&#380;ego ekranu";
+			TEXT_BIGSCR_CHATW = "Szeroko&#347;&#263; czatu (domy&#347;lnie 350px)";
 			
-			TEXT_USERD_HEAD = "Konfiguracja trybu uøytkownika";
-			TEXT_USERD_FLASH = "Mnoønik wielkoúci odtwarzacza Flash (domyúlnie 1.0)";
-			TEXT_USERD_CHATW = "SzerokoúÊ czatu (domyúlnie 300px)";
-			TEXT_USERD_CHATPOS = "Pozycja czatu od prawej strony okna (domyúlnie -70px)";
-			TEXT_USERD_FLASHPOS = "Pozycja odtwarzacza wideo od lewej strony okna (domyúlnie -70px)";
+			TEXT_USERD_HEAD = "Konfiguracja trybu u&#380;ytkownika";
+			TEXT_USERD_FLASH = "Mno&#380;nik wielko&#347;ci odtwarzacza Flash (domy&#347;lnie 1.0)";
+			TEXT_USERD_CHATW = "Szeroko&#347;&#263; czatu (domy&#347;lnie 300px)";
+			TEXT_USERD_CHATPOS = "Pozycja czatu od prawej strony okna (domy&#347;lnie -70px)";
+			TEXT_USERD_FLASHPOS = "Pozycja odtwarzacza wideo od lewej strony okna (domy&#347;lnie -70px)";
 
-			TEXT_CFG_APPLY = "Zastosuj zmiany w trybie uøytkownika";
-			TEXT_CFG_CLEAR_B = "WyczyúÊ ustawienia";
-			TEXT_CLEAR_Q = "Czy jesteú pewien, øe chcesz wyczyúciÊ wszystkie ustawienia?";
-			TEXT_CLEAR_D = "Øadne zmiany nie zosta≥y wprowadzone!";
+			TEXT_CFG_APPLY = "Zastosuj zmiany w trybie u&#380;ytkownika";
+			TEXT_CFG_CLEAR_B = "Wyczy&#347;&#263; ustawienia";
+			TEXT_CLEAR_Q = "Czy jeste&#347; pewien, &#380;e chcesz wyczy&#347;ci&#263; wszystkie ustawienia?";
+			TEXT_CLEAR_D = "&#379;adne zmiany nie zosta&#322;y wprowadzone!";
 		break; 
 		
 		default :
@@ -1013,7 +1013,7 @@ switch(jQuery('html').attr('lang')) {
 	
 	
 	
-///////////////////////////////// DZIA£ANIE ///////////////////////////////// 
+///////////////////////////////// DZIA&#322;ANIE ///////////////////////////////// 
 
 ////////////// ALWAYS
 
@@ -1122,14 +1122,14 @@ if (jQuery('body.channel').exists()) {
 		+ '<p class="config-sub">' +  TEXT_CHAT_HEAD + '</p>'
 		+ '<p class="config-option">' +  TEXT_CHAT_DELETED + ' '
 		+ '<a class="switch cright" id="deletem-button"><span class="option1">YES</span><span class="option2">NO</span><span id="deletem-slider" class="slider"></span></a></p>'
-/////////////////// ODPOWIEDè
+/////////////////// ODPOWIED&#378;
 		+ '<p class="config-option">' +  TEXT_CHAT_REPLY + ' '
 		+ '<a class="switch cright" id="reply-button"><span class="option1">YES</span><span class="option2">NO</span><span id="reply-slider" class="slider"></span></a></p>'
 /////////////////// WYROZNIANIE
 		+ '<p class="config-option">' +  TEXT_CHAT_HIGHLIGHT + ''
 		+ '<div id="nicks-div"><input autocomplete="off" class="text leftround" id="nicks-list" placeholder="Input nicks here" type="text" value="'+nicks+'">'
 		+ '<button class="primary_button" id="nicks-apply" type="submit"><span>Apply</span></button></div>'
-/////////////////// UKRYWANIE POLECANE KANA£Y
+/////////////////// UKRYWANIE POLECANE KANA&#322;Y
 		+ '<p class="config-sub">' +  TEXT_DISP_HEAD + '</p>'
 		+ '<p class="config-option">' +  TEXT_DISP_SUGCHANN + ''
 		+ '<a class="switch cright" id="channels-button"><span class="option1">YES</span><span class="option2">NO</span><span id="channels-slider" class="slider"></span></a></p>'
@@ -1256,7 +1256,7 @@ if (jQuery('body.channel').exists()) {
 	});
 	
 
-///////////////////////////////// SUGEROWANE KANA£Y
+///////////////////////////////// SUGEROWANE KANA&#322;Y
 
 	jQuery('#channels-button').toggle(function () {
 		jQuery('#channels-slider').css({'left' : 'auto', 'right' : '0'});
