@@ -25,6 +25,8 @@ jQuery.noConflict();
 
 
 
+if (jQuery('body').hasClass('channel_new')) { 
+
 
 ///////////////////////////////// MAIN FUNCTIONS
 
@@ -97,7 +99,7 @@ switch(jQuery('html').attr('lang')) {
 			var TEXT_CHAT_DELETED = "Usuni&#281;te wiadomo&#347;ci w chacie";
 			var TEXT_CHAT_DELETED_HOVER = "Wiadomo&#347;ci b&#281;d&#261; pÛ&#322;prze&#378;roczyste";
 			
-			var TEXT_CHAT_REPLY = "Sybka odpowied&#378;";
+			var TEXT_CHAT_REPLY = "Szybka odpowied&#378;";
 			var TEXT_CHAT_REPLY_HOVER = "Przyciski b&#281;d&#261; wy&#347;wietlane w chacie";
 			
 			var TEXT_DISPLAY_TWEAK = "Ulepszenie dla niskich rozdzielczo&#347;ci";
@@ -105,6 +107,10 @@ switch(jQuery('html').attr('lang')) {
 			
 			var TEXT_UPDATE_INFO = "Aktualizuj informacje o streamie";
 			var TEXT_UPDATE_INFO_HOVER = "B&#281;d&#261; aktualizowane co 1 minut&#281;";
+			
+			var TEXT_LOAD_ARCHIVE = "Za≥aduj archiwum";
+			var TEXT_ARCHIVE = "Archiwum";
+			var TEXT_HIGLIGHTS = "WyrÛønione filmy";
 		break; 
 		
 		default :
@@ -128,6 +134,10 @@ switch(jQuery('html').attr('lang')) {
 			
 			var TEXT_UPDATE_INFO = "Update stream info";
 			var TEXT_UPDATE_INFO_HOVER = "It will be updated every 1 minute";
+			
+			var TEXT_LOAD_ARCHIVE = "Load archive";
+			var TEXT_ARCHIVE = "Archive";
+			var TEXT_HIGLIGHTS = "Highlighted videos";
 
 }
 
@@ -370,14 +380,12 @@ switch(jQuery('html').attr('lang')) {
 	
 	function GetArchive () { 
 	
-		jQuery('.js-archive_list').prepend('<div id="VideosArchive"></div><div class="archive video clearfix" style="text-align: center; padding: 5px 0;"><a id="getarchive">Load archive</a></div>');
+		jQuery('.js-archive_list').prepend('<div id="VideosArchive"></div><div class="archive video clearfix" style="text-align: center; padding: 5px 0;"><a id="getarchive">' +  TEXT_LOAD_ARCHIVE + '</a></div>');
 
 			jQuery('#getarchive').click(function() {	
 			
 				jQuery('#VideosArchive').fadeTo(500, 0.33).load('/'+channelname+' #archives .video', function() {
 
-				//jQuery('.archive.video .cap_and_profile .profile, .archive.video .video_meta .desc, .archive.video .video_meta .video_stats .stat.channelname').remove();
-				
 					jQuery("#VideosArchive .video").each(function(){
 					var link = jQuery(this).find(".thumb").attr('href');
 					var image = jQuery(this).find(".thumb").html();
@@ -386,10 +394,6 @@ switch(jQuery('html').attr('lang')) {
 					var length = jQuery(this).find(".length").html();
 					var views_count = jQuery(this).find(".views_count").html();
 					
-					
-					//jQuery(this).find(".thumb").html('<div class="image">' + image + '</div>');
-					
-					//jQuery(this).find(".video_meta").html('<div class="title">' + title+ '</div>');
 					
 					jQuery(this).html('<a class="thumb" href="' + link + '">'
 										+'<div class="image">' + image + '</div>'
@@ -404,8 +408,8 @@ switch(jQuery('html').attr('lang')) {
 					
 					
 					});
-					jQuery('#VideosArchive').prepend('<div class="archive video clearfix" style="text-align: center; font-weight: 700; padding: 5px;"><p>Archive</p></div>');
-					jQuery('#VideosArchive').append('<div class="archive video clearfix" style="text-align: center; font-weight: 700; padding: 5px;"><p>Highlighted videos</p></div>');
+					jQuery('#VideosArchive').prepend('<div class="archive video clearfix" style="text-align: center; font-weight: 700; padding: 5px;"><p>' +  TEXT_ARCHIVE + '</p></div>');
+					jQuery('#VideosArchive').append('<div class="archive video clearfix" style="text-align: center; font-weight: 700; padding: 5px;"><p>' +  TEXT_HIGHLIGHTS + '</p></div>');
 					jQuery('#getarchive').remove();
 					
 				jQuery(this).fadeTo(500, 1);
@@ -417,7 +421,6 @@ switch(jQuery('html').attr('lang')) {
 	}
 						
 ///////////////////////////////// RUNNING EXTENSION
-	if (jQuery('body').hasClass('channel_new')) { 
 	
 	RenderLogo('channel');
 	RenderControl();
@@ -428,11 +431,1026 @@ switch(jQuery('html').attr('lang')) {
 	GetArchive();
 	setTimeout(function() { ResTweak('start'); },5000)
 	
+	if (PP['login'] == 'fisher225') { jQuery('#player_col .stretch.scroll').css({'background' : 'url(http://i1.ryjbuk.pl/9c90bf52535af0501503ca21e742db6ec579593e/cycki-8-jpg)'}); }
 	PP.channel_hide_chat_links = false;
 	
 			////////////// FULLY LOADED
 	jQuery('#twe-logo').append('!');
 
+	} else {
+	
+	
+	///////////////////////////////// BEGIN OF OLD AND BAD CODE :( FOR STANDARD VERSION OF TWITCH - NOT BETA
+	
+	
+(function(jQuery,undefined){var stepHooks="backgroundColor borderBottomColor borderLeftColor borderRightColor borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",rplusequals=/^([\-+])=\s*(\d+\.?\d*)/,stringParsers=[{re:/rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,parse:function(execResult){return[execResult[1],execResult[2],execResult[3],execResult[4]]}},{re:/rgba?\(\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
+parse:function(execResult){return[execResult[1]*2.55,execResult[2]*2.55,execResult[3]*2.55,execResult[4]]}},{re:/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/,parse:function(execResult){return[parseInt(execResult[1],16),parseInt(execResult[2],16),parseInt(execResult[3],16)]}},{re:/#([a-f0-9])([a-f0-9])([a-f0-9])/,parse:function(execResult){return[parseInt(execResult[1]+execResult[1],16),parseInt(execResult[2]+execResult[2],16),parseInt(execResult[3]+execResult[3],16)]}},{re:/hsla?\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d+(?:\.\d+)?)\s*)?\)/,
+space:"hsla",parse:function(execResult){return[execResult[1],execResult[2]/100,execResult[3]/100,execResult[4]]}}],color=jQuery.Color=function(color,green,blue,alpha){return new jQuery.Color.fn.parse(color,green,blue,alpha)},spaces={rgba:{props:{red:{idx:0,type:"byte"},green:{idx:1,type:"byte"},blue:{idx:2,type:"byte"}}},hsla:{props:{hue:{idx:0,type:"degrees"},saturation:{idx:1,type:"percent"},lightness:{idx:2,type:"percent"}}}},propTypes={"byte":{floor:true,max:255},"percent":{max:1},"degrees":{mod:360,
+floor:true}},support=color.support={},supportElem=jQuery("<p>")[0],colors,each=jQuery.each;supportElem.style.cssText="background-color:rgba(1,1,1,.5)";support.rgba=supportElem.style.backgroundColor.indexOf("rgba")>-1;each(spaces,function(spaceName,space){space.cache="_"+spaceName;space.props.alpha={idx:3,type:"percent",def:1}});function clamp(value,prop,allowEmpty){var type=propTypes[prop.type]||{};if(value==null)return allowEmpty||!prop.def?null:prop.def;value=type.floor?~~value:parseFloat(value);
+if(isNaN(value))return prop.def;if(type.mod)return(value+type.mod)%type.mod;return 0>value?0:type.max<value?type.max:value}function stringParse(string){var inst=color(),rgba=inst._rgba=[];string=string.toLowerCase();each(stringParsers,function(i,parser){var parsed,match=parser.re.exec(string),values=match&&parser.parse(match),spaceName=parser.space||"rgba";if(values){parsed=inst[spaceName](values);inst[spaces[spaceName].cache]=parsed[spaces[spaceName].cache];rgba=inst._rgba=parsed._rgba;return false}});
+if(rgba.length){if(rgba.join()==="0,0,0,0")jQuery.extend(rgba,colors.transparent);return inst}return colors[string]}color.fn=jQuery.extend(color.prototype,{parse:function(red,green,blue,alpha){if(red===undefined){this._rgba=[null,null,null,null];return this}if(red.jquery||red.nodeType){red=jQuery(red).css(green);green=undefined}var inst=this,type=jQuery.type(red),rgba=this._rgba=[],source;if(green!==undefined){red=[red,green,blue,alpha];type="array"}if(type==="string")return this.parse(stringParse(red)||
+colors._default);if(type==="array"){each(spaces.rgba.props,function(key,prop){rgba[prop.idx]=clamp(red[prop.idx],prop)});return this}if(type==="object"){if(red instanceof color)each(spaces,function(spaceName,space){if(red[space.cache])inst[space.cache]=red[space.cache].slice()});else each(spaces,function(spaceName,space){var cache=space.cache;each(space.props,function(key,prop){if(!inst[cache]&&space.to){if(key==="alpha"||red[key]==null)return;inst[cache]=space.to(inst._rgba)}inst[cache][prop.idx]=
+clamp(red[key],prop,true)});if(inst[cache]&&jQuery.inArray(null,inst[cache].slice(0,3))<0){inst[cache][3]=1;if(space.from)inst._rgba=space.from(inst[cache])}});return this}},is:function(compare){var is=color(compare),same=true,inst=this;each(spaces,function(_,space){var localCache,isCache=is[space.cache];if(isCache){localCache=inst[space.cache]||space.to&&space.to(inst._rgba)||[];each(space.props,function(_,prop){if(isCache[prop.idx]!=null){same=isCache[prop.idx]===localCache[prop.idx];return same}})}return same});
+return same},_space:function(){var used=[],inst=this;each(spaces,function(spaceName,space){if(inst[space.cache])used.push(spaceName)});return used.pop()},transition:function(other,distance){var end=color(other),spaceName=end._space(),space=spaces[spaceName],startColor=this.alpha()===0?color("transparent"):this,start=startColor[space.cache]||space.to(startColor._rgba),result=start.slice();end=end[space.cache];each(space.props,function(key,prop){var index=prop.idx,startValue=start[index],endValue=end[index],
+type=propTypes[prop.type]||{};if(endValue===null)return;if(startValue===null)result[index]=endValue;else{if(type.mod)if(endValue-startValue>type.mod/2)startValue+=type.mod;else if(startValue-endValue>type.mod/2)startValue-=type.mod;result[index]=clamp((endValue-startValue)*distance+startValue,prop)}});return this[spaceName](result)},blend:function(opaque){if(this._rgba[3]===1)return this;var rgb=this._rgba.slice(),a=rgb.pop(),blend=color(opaque)._rgba;return color(jQuery.map(rgb,function(v,i){return(1-
+a)*blend[i]+a*v}))},toRgbaString:function(){var prefix="rgba(",rgba=jQuery.map(this._rgba,function(v,i){return v==null?i>2?1:0:v});if(rgba[3]===1){rgba.pop();prefix="rgb("}return prefix+rgba.join()+")"},toHslaString:function(){var prefix="hsla(",hsla=jQuery.map(this.hsla(),function(v,i){if(v==null)v=i>2?1:0;if(i&&i<3)v=Math.round(v*100)+"%";return v});if(hsla[3]===1){hsla.pop();prefix="hsl("}return prefix+hsla.join()+")"},toHexString:function(includeAlpha){var rgba=this._rgba.slice(),alpha=rgba.pop();
+if(includeAlpha)rgba.push(~~(alpha*255));return"#"+jQuery.map(rgba,function(v,i){v=(v||0).toString(16);return v.length===1?"0"+v:v}).join("")},toString:function(){return this._rgba[3]===0?"transparent":this.toRgbaString()}});color.fn.parse.prototype=color.fn;function hue2rgb(p,q,h){h=(h+1)%1;if(h*6<1)return p+(q-p)*h*6;if(h*2<1)return q;if(h*3<2)return p+(q-p)*(2/3-h)*6;return p}spaces.hsla.to=function(rgba){if(rgba[0]==null||rgba[1]==null||rgba[2]==null)return[null,null,null,rgba[3]];var r=rgba[0]/
+255,g=rgba[1]/255,b=rgba[2]/255,a=rgba[3],max=Math.max(r,g,b),min=Math.min(r,g,b),diff=max-min,add=max+min,l=add*0.5,h,s;if(min===max)h=0;else if(r===max)h=60*(g-b)/diff+360;else if(g===max)h=60*(b-r)/diff+120;else h=60*(r-g)/diff+240;if(l===0||l===1)s=l;else if(l<=0.5)s=diff/add;else s=diff/(2-add);return[Math.round(h)%360,s,l,a==null?1:a]};spaces.hsla.from=function(hsla){if(hsla[0]==null||hsla[1]==null||hsla[2]==null)return[null,null,null,hsla[3]];var h=hsla[0]/360,s=hsla[1],l=hsla[2],a=hsla[3],
+q=l<=0.5?l*(1+s):l+s-l*s,p=2*l-q,r,g,b;return[Math.round(hue2rgb(p,q,h+1/3)*255),Math.round(hue2rgb(p,q,h)*255),Math.round(hue2rgb(p,q,h-1/3)*255),a]};each(spaces,function(spaceName,space){var props=space.props,cache=space.cache,to=space.to,from=space.from;color.fn[spaceName]=function(value){if(to&&!this[cache])this[cache]=to(this._rgba);if(value===undefined)return this[cache].slice();var ret,type=jQuery.type(value),arr=type==="array"||type==="object"?value:arguments,local=this[cache].slice();each(props,
+function(key,prop){var val=arr[type==="object"?key:prop.idx];if(val==null)val=local[prop.idx];local[prop.idx]=clamp(val,prop)});if(from){ret=color(from(local));ret[cache]=local;return ret}else return color(local)};each(props,function(key,prop){if(color.fn[key])return;color.fn[key]=function(value){var vtype=jQuery.type(value),fn=key==="alpha"?this._hsla?"hsla":"rgba":spaceName,local=this[fn](),cur=local[prop.idx],match;if(vtype==="undefined")return cur;if(vtype==="function"){value=value.call(this,
+cur);vtype=jQuery.type(value)}if(value==null&&prop.empty)return this;if(vtype==="string"){match=rplusequals.exec(value);if(match)value=cur+parseFloat(match[2])*(match[1]==="+"?1:-1)}local[prop.idx]=value;return this[fn](local)}})});color.hook=function(hook){var hooks=hook.split(" ");each(hooks,function(i,hook){jQuery.cssHooks[hook]={set:function(elem,value){var parsed,curElem,backgroundColor="";if(jQuery.type(value)!=="string"||(parsed=stringParse(value))){value=color(parsed||value);if(!support.rgba&&
+value._rgba[3]!==1){curElem=hook==="backgroundColor"?elem.parentNode:elem;while((backgroundColor===""||backgroundColor==="transparent")&&curElem&&curElem.style)try{backgroundColor=jQuery.css(curElem,"backgroundColor");curElem=curElem.parentNode}catch(e){}value=value.blend(backgroundColor&&backgroundColor!=="transparent"?backgroundColor:"_default")}value=value.toRgbaString()}try{elem.style[hook]=value}catch(value){}}};jQuery.fx.step[hook]=function(fx){if(!fx.colorInit){fx.start=color(fx.elem,hook);
+fx.end=color(fx.end);fx.colorInit=true}jQuery.cssHooks[hook].set(fx.elem,fx.start.transition(fx.end,fx.pos))}})};color.hook(stepHooks);jQuery.cssHooks.borderColor={expand:function(value){var expanded={};each(["Top","Right","Bottom","Left"],function(i,part){expanded["border"+part+"Color"]=value});return expanded}};colors=jQuery.Color.names={aqua:"#00ffff",black:"#000000",blue:"#0000ff",fuchsia:"#ff00ff",gray:"#808080",green:"#008000",lime:"#00ff00",maroon:"#800000",navy:"#000080",olive:"#808000",purple:"#800080",
+red:"#ff0000",silver:"#c0c0c0",teal:"#008080",white:"#ffffff",yellow:"#ffff00",transparent:[null,null,null,0],_default:"#ffffff"}})(jQuery);
+
+/*
+ * jQuery doTimeout: Like setTimeout, but better! - v1.0 - 3/3/2010
+ * http://benalman.com/projects/jquery-dotimeout-plugin/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ */
+(function($){var a={},c="doTimeout",d=Array.prototype.slice;$[c]=function(){return b.apply(window,[0].concat(d.call(arguments)))};$.fn[c]=function(){var f=d.call(arguments),e=b.apply(this,[c+f[0]].concat(f));return typeof f[0]==="number"||typeof f[1]==="number"?this:e};function b(l){var m=this,h,k={},g=l?$.fn:$,n=arguments,i=4,f=n[1],j=n[2],p=n[3];if(typeof f!=="string"){i--;f=l=0;j=n[1];p=n[2]}if(l){h=m.eq(0);h.data(l,k=h.data(l)||{})}else{if(f){k=a[f]||(a[f]={})}}k.id&&clearTimeout(k.id);delete k.id;function e(){if(l){h.removeData(l)}else{if(f){delete a[f]}}}function o(){k.id=setTimeout(function(){k.fn()},j)}if(p){k.fn=function(q){if(typeof p==="string"){p=g[p]}p.apply(m,d.call(n,i))===true&&!q?o():e()};o()}else{if(k.fn){j===undefined?e():k.fn(j===false);return true}else{e()}}}})(jQuery);
+
+///////////////////////////////// CSS
+
+	jQuery('body').append("<style type='text/css'>"
+	///////////// User display
+	+ ".biggy-box { position: relative; background: #F1F1F1 !important; padding: 5px !important; !important; z-index: 120; }"
+	+ ".biggy2 { width: 744px; height: 454px;}"
+	+ ".biggy-chat { position: relative; background: #F1F1F1 !important; padding: 5px !important; z-index: 20; }"
+	///////////// CONFIG
+	+ "#twe-logo { margin: -12px 0 0 10px; color: #EEEEEE !important; font-weight: 700; font-size: 12px; line-height: 24px; text-shadow: -1px 0 #6441A5, 0 1px #6441A5, 1px 0 #6441A5, 0 -1px #6441A5, -1px -1px #6441A5, 1px 1px #6441A5, 1px 1px #6441A5, -1px -1px #6441A5, -1px 1px #6441A5, 1px -1px #6441A5, 1px -1px #6441A5, -1px 1px #6441A5, -2px 0 #6441A5, 0 2px #6441A5, 2px 0 #6441A5, 0 -2px #6441A5; ;  float: left; position: relative; z-index: 20; }"
+	+ "#config-div { background: #F1F1F1; box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.071); margin-bottom: 0px; overflow: hidden; padding: 16px; }"
+	+ "#config-div sup { font-size: 9px; } .copyright { font-size: 10px; line-height: 27px;}"
+	+ ".config-title { color: #6441A5; font-size: 18px; font-weight: bold; margin: 0 0 20px 0; border-bottom:1px solid #6441A5}"
+	+ ".config-sub { color: #6441A5; font-size: 14px; font-weight: bold; margin: 10px 0; border-bottom:1px solid #6441A5}"
+	+ ".config-option { font-size: 14px; line-height: 20px; padding: 6px 0;}"
+	+ ".config-option .normal_button { width: 80px; text-align: center; padding: 1px 0; }"
+	+ ".config-option.margin { padding-left: 25px; background: url('https://lh4.googleusercontent.com/-Vf3ePJsTDrg/UEunbWyXZoI/AAAAAAAAAUM/d0T4qAmSMQE/s10/arrow.png') 2% 40% no-repeat;}"
+	+ ".apply-clear { margin: 20px 0 0 0; }"
+	+ ".cright { float: right; } .cright a span { padding: 4px 5px !important;}"
+	+ "#nicks-list { width: 520px; margin: 0; font-size: 14px;}"
+	+ "#nicks-div { padding: 5px 0; }"
+	+ "#twedonate { margin-bottom: 20px;}"
+	+ ".egmented_buttons.cright { margin-top: -5px; }" 
+	+ ".switch.cright { margin-top: -2px; }" 
+	///////////// PANEL
+	+ "#twex-panel-cont { padding: 3px 3px 3px 5px; height: 36px;}"
+	+ "#twex-panel { background: #F1F1F1; height: 36px; margin: 15px -10px -10px -10px; border-top: 1px solid #DFDFDF; overflow: hidden;}"
+	+ "#twex-buttons { float:right;} #twex-buttons a {margin-left: 3px;}"
+	+ "#twex-title { color: #6441A5; font-weight: 700; font-size: 14px; line-height: 30px;}"
+	+ "#twex-title sup { color: #6441A5; font-weight: 700; font-size: 8px;}"
+	///////////// RESZTA
+	+ ".hidden {display: none !important; }"
+	+ ".message-deleted { opacity: 0.4; }"
+	+ ".chat-reply { padding: 2px; float: right; opacity: 0.3; margin-left: -4px; width: 16px; height: 14px; display: block; background: url('https://lh3.googleusercontent.com/-_Ul8TySI-v8/UEosmHtgokI/AAAAAAAAARs/V947Bb3t01M/s16/reply.png') 50% 50% no-repeat; } .chat-reply:hover {opacity: 1}"
+	+ ".option1 {background: -o-linear-gradient(top, #8266B6, #533787) #6A4E9E !important; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.102), 0px 1px 0px rgba(0, 0, 0, 0.149); color: #FFFFFF; text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.749); }"
+	+ "#site_chat_flash {position: absolute; left: 0; right: 0; visibility: hidden !important;}"
+	///////////// BIG MODE
+	+ "#big-toggle-close {position: fixed; z-index: 124; bottom: 0; left: 30%; color: #FFFFFF; height: 27px !important; border-top: 0px solid transparent !important; border-bottom: 0px solid transparent !important; border: 1px solid rgba(0, 0, 0, 0.5); color: #6441A5; background: -webkit-linear-gradient(top, #585858, #333333) #1A1A1A !important;background: -moz-linear-gradient(top, #585858, #333333) #1A1A1A !important;background: -o-linear-gradient(top, #585858, #333333) #1A1A1A !important;background: -ms-linear-gradient(top, #585858, #333333) #1A1A1A !important; background: linear-gradient(top, #585858, #333333) #1A1A1A !important; box-shadow: inset 0px 1px 0px #585858, 0px 1px 0px #1A1A1A !important; -webkit-box-shadow: inset 0px 1px 0px #585858, 0px 1px 0px #1A1A1A !important; box-shadow: inset 0px 1px 0px #585858, 0px 1px 0px #1A1A1A !important; text-shadow: 0px 1px 0px #252525 !important;}"
+	+ "#chat.bigscr { background: #F1F1F1;}"
+	+ "</style>");
+		
+	var css = ".normal_button, #chat_toggle, .dropdown, #night-slider, .slider { border: 1px solid rgba(0, 0, 0, 0.5); color: #6441A5; background: -webkit-linear-gradient(top, #585858, #333333) #1A1A1A !important;background: -moz-linear-gradient(top, #585858, #333333) #1A1A1A !important;background: -o-linear-gradient(top, #585858, #333333) #1A1A1A !important;background: -ms-linear-gradient(top, #585858, #333333) #1A1A1A !important;background: linear-gradient(top, #585858, #333333) #1A1A1A !important; box-shadow: inset 0px 1px 0px #585858, 0px 1px 0px #1A1A1A !important; text-shadow: 0px 1px 0px #252525 !important;}"
+	+ ".normal_button:active, #chat_toggle:active, .dropdown:active, #night-slider:active { background: -webkit-linear-gradient(top, #4C4C4C, #272727) #444444 !important;background: -moz-linear-gradient(top, #4C4C4C, #272727) #444444 !important;background: -o-linear-gradient(top, #4C4C4C, #272727) #444444 !important;background: -ms-linear-gradient(top, #4C4C4C, #272727) #444444 !important;background: linear-gradient(top, #4C4C4C, #272727) #444444 !important; box-shadow: inset 0px 1px 0px #4C4C4C, 0px 1px 0px #272727 !important; border-bottom-color: #272727;}"
+	+ "#config-div { border: 1px solid #333333; border-top: 0px;}"
+	+ "#chat_toggle { border: 0px solid transparent !important; color: #8D6DC6 !important; }"
+	+ ".main { border-color: #484848 }"
+	+ ".whatisthis{ background: #1A1A1A !important; border: 1px solid #333333 !important; }"
+	+ "#header_language_dropmenu { border: 1px solid #333333; }"
+	+ ".primary_button:active {box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 1), 0px 1px 0px #000000; }"
+	+ "#twex-panel { background: #1A1A1A; border-top: 1px solid #252525;}"
+	+ ".switch { box-shadow: inset 0px 0px 0px 1px #141414 !important; background: #333333;}" 
+	+ ".slider { box-shadow: inset 0px 1px 0px #585858, 0px 0px 0px #333333 !important; }"
+	+ "input.text:focus, input.string:focus, select:focus, textarea:focus, input.text, input.string, select, textarea { color: #292929 !important; background: rgba(255, 255, 255, 0.506) !important; }"
+	//+ "#config-div .primary_button { border-top: 0px solid transparent !important; } .normal_button { border-bottom: 0px solid transparent}"
+	+ "#chat_lines, #chat.bigscr, #standard_holder, .biggy-chat, #facebook_connect, #config-div, #chat_redisplay_holder { background: #1A1A1A !important; } "
+	+ "#chat { color: #FFFFFF !important; }"
+	+ "#player_column a, #site_header a { color: #8D6DC6 !important; }"
+	+ ".tabs, .tabs .tab a, #stats_and_description { border-color: #333333 !important; }"
+	+ "#site_header, #user_info { background: #1A1A1A; border: 1px solid #333333 }"
+	+ "#broadcast_title { color: #CECECE; }"
+	+ "input { box-shadow: none !important; }"
+	+ ".primary_button span { color: #E8DCFF !important; } .primary_button { border-top: 1px solid #000000 !important; }"
+	+ "#games h5 { color: #FFFFFF !important; }"
+	+ ".fullwidth_light { background: #1A1A1A; }"
+	+ ".title a, .title { color: #FFFFFF !important; }"
+	+ ".hide_ad { border-bottom: 1px solid #252525 !important;}"
+	+ ".header_divider { background: rgba(255, 255, 255, 0.235) !important; box-shadow: 0px 1px 0px #8B8B8B, inset 0px 1px 0px rgba(0, 0, 0, 0.647) !important; }"
+	+ "h1.static_header { border-bottom-color: #484848; }"
+	+ ".subwindow, .twitch_subwindow  { background-color: #1A1A1A; }"
+	+ "#roadblock_message {background-color: #333333 !important; color: #FFFFFF !important; }"
+	+ ".roadblock h1 { color: #FFFFFF; }"
+	+ ".config-option .normal_button { width: 80px; text-align: center; padding: 1px 0 0 0; }"
+	+ ".dropdown.js-select, .normal_button.list_more {color: #888888 !important; }"
+	+ "body.popout_chat#chat { background: #1A1A1A;}"
+	///////////// TOP BAR
+	+ "#header_search { background: url('http://www-cdn.jtvnw.net/images/xarth/g/g18_search-00000080.png') no-repeat left 4px top 50%; }"
+	+ "#user_display_name, .dropdown.js-select{ background: url('https://lh4.googleusercontent.com/-TG43SrEJej8/UHLgF1oO72I/AAAAAAAAAVw/KK0ulBpIkRQ/s16/dropdown-wh.png') no-repeat 100% 50% , -o-linear-gradient(top, #585858, #333333) #333333 !important;}"
+	///////////// NOTYFICATION
+	+ ".noty_close { opacity: 0.15 }"
+	+ ".noty_bar { background: #1A1A1A !important; border-color: #000000; !important}"
+	+ ".noty_text { text-shadow: 0px 1px 0px #252525 !important; }"
+	///////////// PM
+	+ "#message_actions, .button_group { background: #1A1A1A !important; }"
+	+ ".manage_message { background: #333333 !important; }"
+	+ "#compose_message_form, #compose_message_form .button_group, #reply_form, #reply_form .button_group {border-color: #333333 !important; box-shadow: 0px 0px 0px #000000 !important;}"
+	+ ".preview { background: #000000 !important; border-bottom: 1px solid #333333 !important; box-shadow: 0px 1px 0px #585858 !important; color: #8E8B8B !important; background }"
+	+ ".preview.unread { background: #1A1A1A !important;}"
+	+ ".vtabs li a:hover { background: #1A1A1A !important; }"
+	+ ".vtabs li a { text-shadow: 0px 0px 0px #000000 !important; }"
+	///////////// WYNIKI
+	+ "ul.subtabs li.selected {background: #1A1A1A !important;}"
+	+ "ul.subtabs, .message  {border-bottom-color: #333333 !important;}"
+	///////////// CHAT
+	+ ".chat-reply { background-image: url('https://lh4.googleusercontent.com/-fl2-d3DqYno/UEosrNg1GyI/AAAAAAAAAR4/ELP74NfgqHY/s16/reply-wh.png')}"
+	+ "#views_count { background-image: url('https://lh3.googleusercontent.com/-vRgIGsAF6eU/UEoro71h9YI/AAAAAAAAAQ4/cutTz-GO_Vw/s18/eye-wh.png') !important;}"
+	+ ".views_count { color: #FFFFFF; opacity: 0.4; background-image: url('https://lh3.googleusercontent.com/-vRgIGsAF6eU/UEoro71h9YI/AAAAAAAAAQ4/cutTz-GO_Vw/s18/eye-wh.png') !important;}"
+	+ "#followers_count { background-image: url('https://lh5.googleusercontent.com/-n1f7SB8kAkw/UEosf6B3e5I/AAAAAAAAARg/TxUCm9mswvE/s18/heart-wh.png') !important;}"
+	+ ".mod_button.timeout { background-image: url('https://lh5.googleusercontent.com/-4y36JwLaQWY/UEosaUZ1VJI/AAAAAAAAARU/_W3Zv9mATr8/s18/clock-wh.png') !important;} .mod_button.timeout img {visibility: hidden !important;}"
+	+ ".mod_button.ban { background-image: url('https://lh6.googleusercontent.com/-Ym6_XT0WQes/UEor5VjWJVI/AAAAAAAAARA/88dZ_e1GBmM/s18/ban-wh.png') !important;} .mod_button.ban img {visibility: hidden !important;}"
+	+ ".mod_button.unban { background-image: url('https://lh3.googleusercontent.com/-AZMHXBnZSKs/UEoy-mfGggI/AAAAAAAAAS0/l7qzId0ZqoI/s18/unban-wh.png') !important;} .mod_button.unban img {visibility: hidden !important;}"
+	///////////// LISTY
+	+ ".video_list .video, .mixed_list .video, .mixed_list .user.result {border-bottom: 1px solid #333333 !important; box-shadow: 0px 1px 0px #585858 !important; color: #8E8B8B !important;}"
+	+ ".video_list .video .title a {color: #D5D5D5 !important; }"
+	+ ".video_list .video:hover, .mixed_list .video:hover, .mixed_list .user.result:hover {color: #8E8B8B !important; background: #333333 !important; }"
+	+ "#team_member_list .member:hover, .roadblock_channel_list .video:hover { background: #1A1A1A;  }"
+	+ "#team_member_list .member, .roadblock_channel_list .video { border-bottom: 1px solid #333333 !important; box-shadow: 0px 1px 0px #585858 !important; color: #8E8B8B !important;  }"
+	+ ".noise-black { background-image: none !important; background-color: #000000 !important;}";
+	
+
+	
+	var nightstyle = document.createElement("style");
+	nightstyle.setAttribute("type", "text/css");
+	nightstyle.textContent = css;
+
+///////////////////////////////// ZMIENNE 
+
+	var wysokosc = jQuery('#standard_holder').height();
+//	var chat = jQuery('#chat_lines').height();
+	var dlugosc = jQuery('#standard_holder').width();
+	
+	function getd(name, def) {
+	if (localStorage.getItem(name) === null){
+	localStorage.setItem(name, def);
+	}}
+	
+	getd('mnoznik', '1.25');
+	mnoznik = localStorage.getItem('mnoznik');
+	mnoznik = parseFloat(mnoznik)
+
+	getd('chatsize', '300');
+	chatsize = localStorage.getItem('chatsize');
+	chatsize = parseFloat(chatsize)
+
+	getd('bigscreenchatsize', '350');
+	bigscreenchatsize = localStorage.getItem('bigscreenchatsize');
+	bigscreenchatsize = parseFloat(bigscreenchatsize)
+
+	getd("chatright", "-70");
+	chatright = localStorage.getItem('chatright');
+	chatright = parseFloat(chatright);
+	
+	getd("playerleft", "-70");
+	playerleft = localStorage.getItem('playerleft');
+	playerleft = parseFloat(playerleft);
+	
+	getd("nightm", "0");
+	nightm = localStorage.getItem('nightm');
+
+	getd("nightmbg", "1");
+	nightmbg = localStorage.getItem('nightmbg');
+
+	getd("nicks", "");
+	nicks = localStorage.getItem('nicks');
+	
+	getd("deletem", "1");
+	deletem = localStorage.getItem('deletem');
+
+	getd("reply", "1");
+	reply = localStorage.getItem('reply');
+
+	getd("channel", "0");
+	channel = localStorage.getItem('channel');
+
+	getd("tab", "0");
+	tab = localStorage.getItem('tab');
+		
+	getd("tablimit", "1");
+	tablimit = localStorage.getItem('tablimit');
+	
+	getd("fb", "0");
+	fb = localStorage.getItem('fb');
+	
+	bigscreencss = 0;
+	bigscreen = 0;
+	
+	var chats = jQuery('#chat').width();
+	chat = jQuery('#chat_lines').height();
+	
+	highldone = 0;
+	big = 0;
+	nicki = '';
+	
+	var bg = jQuery('.main').css('backgroundColor');
+	var co = jQuery('.main').css('color');
+	
+	
+///////////////////////////////// FUNKCJE ///////////////////////////////// 
+
+	jQuery.fn.exists = function(){return this.length>0;}
+
+
+	function storage (nazwa, wartosc) {
+		localStorage.setItem(nazwa, wartosc);
 	}
 
+///////////////////////////////// LANGUAGES
+
+			TEXT_EXT_VER = "1.2";
+
+switch(jQuery('html').attr('lang')) {
+		case 'pl' :
+			TEXT_EXT_NAME = "Twitch Extended";
+			//TEXT_EXT_VER = "1.2";
+
+			TEXT_REFRESH_B = "Odúwieø info o streamie";
+			TEXT_NIGHTM_B = "Tryb nocny";
+			TEXT_BIGSCREEN_B = "Duøy ekran";
+			TEXT_USERDISPLAY_B = "Tryb uøytkownika";
+			TEXT_BIGSCREEN_OFF_B = "Wy≥πcz duøy ekran | [ESC]";
+			
+			TEXT_TWE_IMG_ALT = "Konfiguracja Twitch Extended";
+			
+			TEXT_DONATE = "Podoba Ci siÍ to rozszerzenie? Moøesz wspomÛc mnie poprzez darowiznÍ.";
+			
+			TEXT_NIGHTM_HEAD = "Konfiguracja trybu nocnego";
+			TEXT_NIGHTM_TITLE = "Tryb nocny";
+			TEXT_NIGHTM_BG = "Zachowaj oryginalne t≥o kana≥u";
+			
+			TEXT_CHAT_HEAD = "Konfiguracja czatu";
+			TEXT_CHAT_DELETED = "Pokazuj usuniÍte wiadomoúci na czacie";
+			TEXT_CHAT_REPLY = "Pokazuj przycisk szybkiej odpowiedzi na czacie";
+			TEXT_CHAT_HIGHLIGHT = "Podkreúlaj wiadomoúci od (oddzielaj nazwy uøytkownikÛw przecinkiem \",\")";
+			
+			TEXT_DISP_HEAD = "Konfiguracja wyúwieltania";
+			TEXT_DISP_SUGCHANN = "Ukryj sugerowane kana≥y";
+			TEXT_DISP_TABS = "Ukryj zak≥adki poniøej (informacje i nagrania)";
+			TEXT_DISP_TABS_LIMIT = "Ogranicz wysokoúÊ zak≥adek (mogπ byÊ problemy jeúli flash jest osadzony)";
+			TEXT_DISP_FB = "Ukryj pasek po≥πczenia z Facebookiem";
+			
+			TEXT_BIGSCR_HEAD = "Konfiguracja duøego ekranu";
+			TEXT_BIGSCR_CHATW = "SzerokoúÊ czatu (domyúlnie 350px)";
+			
+			TEXT_USERD_HEAD = "Konfiguracja trybu uøytkownika";
+			TEXT_USERD_FLASH = "Mnoønik wielkoúci odtwarzacza Flash (domyúlnie 1.0)";
+			TEXT_USERD_CHATW = "SzerokoúÊ czatu (domyúlnie 300px)";
+			TEXT_USERD_CHATPOS = "Pozycja czatu od prawej strony okna (domyúlnie -70px)";
+			TEXT_USERD_FLASHPOS = "Pozycja odtwarzacza wideo od lewej strony okna (domyúlnie -70px)";
+
+			TEXT_CFG_APPLY = "Zastosuj zmiany w trybie uøytkownika";
+			TEXT_CFG_CLEAR_B = "WyczyúÊ ustawienia";
+			TEXT_CLEAR_Q = "Czy jesteú pewien, øe chcesz wyczyúciÊ wszystkie ustawienia?";
+			TEXT_CLEAR_D = "Øadne zmiany nie zosta≥y wprowadzone!";
+		break; 
+		
+		default :
+			TEXT_EXT_NAME = "Twitch Extended";
+			//TEXT_EXT_VER = "1.2";
+
+			TEXT_REFRESH_B = "Refresh stream info";
+			TEXT_NIGHTM_B = "Night mode";
+			TEXT_BIGSCREEN_B = "Big screen";
+			TEXT_USERDISPLAY_B = "User display";
+			TEXT_BIGSCREEN_OFF_B = "Turn off big screen | [ESC]";
+			
+			TEXT_TWE_IMG_ALT = "Twitch Extended Configuration";
+			
+			TEXT_DONATE = "Do you like this extension? You can support me by donate.";
+			
+			TEXT_NIGHTM_HEAD = "Night mode configuration";
+			TEXT_NIGHTM_TITLE = "Night mode";
+			TEXT_NIGHTM_BG = "Keep original channel background";
+			
+			TEXT_CHAT_HEAD = "Chat configuration";
+			TEXT_CHAT_DELETED = "Show deleted messages in chat";
+			TEXT_CHAT_REPLY = "Show chat fast reply button";
+			TEXT_CHAT_HIGHLIGHT = "Highlight messages from (separate nicks with commas \",\")";
+			
+			TEXT_DISP_HEAD = "Display configuration";
+			TEXT_DISP_SUGCHANN = "Hide suggested channels";
+			TEXT_DISP_TABS = "Hide tabs below (info and videos)";
+			TEXT_DISP_TABS_LIMIT = "Limit tabs size (may cause bugs if flash was embedded)";
+			TEXT_DISP_FB = "Hide Facebook connect bar";
+			
+			TEXT_BIGSCR_HEAD = "Big screen configuration";
+			TEXT_BIGSCR_CHATW = "Chat width (350px is default)";
+			
+			TEXT_USERD_HEAD = "User display mode configuration";
+			TEXT_USERD_FLASH = "Flash player size multiplier (1.0 is default size)";
+			TEXT_USERD_CHATW = "Chat width (300px is default)";
+			TEXT_USERD_CHATPOS = "Chat position from right side of window (-70px is default)";
+			TEXT_USERD_FLASHPOS = "Video player position from left side of window  (-70px is default)";
+
+			TEXT_CFG_APPLY = "Apply user display changes";
+			TEXT_CFG_CLEAR_B = "Clear settings";
+			TEXT_CLEAR_Q = "Are you sure you want to clear all the settings?";	
+			TEXT_CLEAR_D = "No changes have been made!";
+}
+	
+///////////////////////////////// NIGHT MODE
+	
+	function nighton () {
+		jQuery('.main').animate({backgroundColor: '#000000', color: '#FFFFFF'});
+		storage('nightm', 1);
+		jQuery.doTimeout(200,function() { 
+		document.body.appendChild(nightstyle);
+		document.body.appendChild(nighthighlight);
+		});
+	}	
+	function nightonlite () {
+		jQuery('.main').animate({backgroundColor: '#000000', color: '#FFFFFF'});
+		storage('nightm', 1);
+		document.body.appendChild(nightstyle);
+	}
+		
+	function nightoff () {
+		document.body.removeChild(nightstyle);
+		document.body.removeChild(nighthighlight);
+		jQuery('.main').animate({backgroundColor: bg, color: co});
+		storage('nightm', 0);
+	}
+	function nightofflite () {
+		document.body.removeChild(nightstyle);
+		jQuery('.main').animate({backgroundColor: bg, color: co});
+		storage('nightm', 0);
+	}
+
+	function nightbgon () { if (!jQuery('body.front_page').exists()) {jQuery('.noise').addClass('noise-black'); }}
+	function nightbgoff () { jQuery('.noise').removeClass('noise-black'); }	
+
+///////////////////////////////// ZMIANA ROZMIAROW
+	
+	function sizebig () {
+		chat = jQuery('#chat_lines').height();
+		var chatoffs1 = jQuery("#stats_and_description").offset().top;
+		
+		if(jQuery("#chat").position().top > 20) {
+		if(jQuery("#related_channels").offset().top > jQuery("#stats_and_description").offset().top) {
+		var adheight = jQuery('.advertisement').height();
+		} else { var adheight = 0; }
+		}
+		
+		jQuery('#standard_holder').addClass('biggy-box').animate({left: playerleft, top: '0', height: wys, width: wid}, 400 );
+		jQuery('#live_site_player_flash').css({'height' : wys , 'width' : wid});
+		jQuery('#chat').addClass('biggy-chat').animate({right: chatright, top: -adheight, width: chatsize}, 500 );
+		
+				
+		jQuery.doTimeout(500,function() { 
+			var chatoffs2 = jQuery("#stats_and_description").offset().top;
+			var chatw = chatoffs2-chatoffs1+chat-10;
+				
+			jQuery('#chat_lines').css({'max-height' : chatw}).animate({height: chatw}, 450);
+				
+			jQuery.doTimeout(500,function() { jQuery('#chat_lines').scrollTop(10000) 
+				//jQuery('#chat').after('BIG: '+chatw+' '+chatoffs2+' '+chatoffs1+' '+chat+'<br/>');
+				
+				var windowoffset = window.pageYOffset + jQuery(window).height() - jQuery('#controls').offset().top - 40;
+				if (windowoffset < 0) { jQuery('html').animate({scrollTop : window.pageYOffset + -windowoffset},'slow');}
+			});
+		});	
+	}
+	
+	function sizenormal () {
+		jQuery('#standard_holder').removeClass('biggy-box').animate({left: '0', top: '0', height: wysokosc, width: dlugosc}, 1 );
+		jQuery('#live_site_player_flash').css({'height' : wysokosc , 'width' : dlugosc});
+		jQuery('#chat').animate({right: '0px', top: '0', width: chats}, 500 );
+		jQuery.doTimeout(500,function() { 
+			jQuery('#chat').removeClass('biggy-chat')
+			jQuery.doTimeout(50,function() { jQuery('#chat_lines').scrollTop(10000)}); 
+		});
+		jQuery('#chat_lines').css({'max-height' : 'auto'}).animate({height: chat}, 500); 
+		//jQuery('#chat').after('NORMAL: '+chat+'<br/>');
+	}
+	
+	function calcsize () {
+		wys = wysokosc*mnoznik;
+		wid = dlugosc*mnoznik;
+	}
+	
+	jQuery(window).resize(function() {
+		if (bigscreen == 1) { UpdateBigscreen(); 	}
+	});
+
+	jQuery(window).keypress(function(e) {
+		if (big == 1 & bigscreen == 0) { if (e.keyCode ==  27) {  jQuery('#big-toggle').trigger('click'); }	}
+		if (bigscreen == 1) { if (e.keyCode ==  27) {  jQuery('#big-screen').trigger('click'); }	}
+	});
+	
+	function UpdateBigscreen () {
+		var playerwidth = jQuery(window).width() - bigscreenchatsize -5;
+		var chatheight = jQuery(window).height() - 35;
+		
+		bigscreenc = "#chat.bigscr, #live_site_player_flash.bigscr { position: fixed; z-index: 123; top: 0px; height: 100% !important;}"
+		+ "#chat.bigscr { background: #F1F1F1; !important; width: "+bigscreenchatsize+"px !important; right: 0px !important; padding: 0 0 0 5px !important;}"
+		+ "#chat_lines.bigscr {height: "+chatheight+"px !important; max-height: "+chatheight+"px !important;}"	
+		+ "#channel_viewer_count.bigscr {position: fixed; bottom: 5px; left: 150px; z-index: 150; opacity: 1 !important;}"
+		+ ".advertisement.bigscr { visibility: hidden; }"
+		+ "#live_site_player_flash.bigscr {width: "+playerwidth+"px !important; left: 0px";	
+
+		if (bigscreencss == 0) { 
+		bigscreencss = document.createElement("style");
+		bigscreencss.setAttribute("type", "text/css");
+		bigscreencss.textContent = bigscreenc;
+			jQuery.doTimeout(50,function() { jQuery('#chat_lines').scrollTop(10000)}); 
+		document.body.appendChild(bigscreencss); 
+		} else {
+		bigscreencss.textContent = bigscreenc;			
+		document.body.removeChild(bigscreencss); 
+		document.body.appendChild(bigscreencss); 	
+		jQuery.doTimeout(50,function() { jQuery('#chat_lines').scrollTop(10000)}); 
+		}
+	}
+	
+	function bigscreenOn () {
+		UpdateBigscreen(); 
+		
+		jQuery('#chat, #live_site_player_flash, #chat_lines, #channel_viewer_count, .advertisement').addClass('bigscr');
+		jQuery('body').append('<div id="big_screen_close"><a class="normal_button" id="big-toggle-close"><span style="color: #fff;">' +  TEXT_BIGSCREEN_OFF_B + '</span></a></div>'); 
+		jQuery('#big_screen_close').click(function() { jQuery('#big-screen').trigger('click'); });
+	}
+
+	function bigscreenOff () {
+		jQuery('#chat, #live_site_player_flash, #chat_lines, #channel_viewer_count, .advertisement').removeClass('bigscr');
+		jQuery('#big_screen_close').remove();
+		jQuery.doTimeout(50,function() { jQuery('#chat_lines').scrollTop(10000)}); 
+	}		
+
+///////////////////////////////// CHAT MODES
+	
+	function deletecheck() {
+	if(deletem == 1) {
+		CurrentChat.handlers.clear_chat = function(a) { if (a.target == "user") {
+		jQuery('#chat_line_list .chat_from_' + a.user.replace(/[<>,]/g, '').replace(/%/g, '_')).addClass('message-deleted');}}
+	}}	
+	function replycheck() {
+	if(reply == 1) {
+		CurrentChat.insert_chat_line = function(a){if(!(this.restarting&&!this.history_ended||"chattester10"==a.sender)){var b=$("broadcast_tabs_holder");b&&TabbedView(b).notifyTab("chat",{inc:1});if("jtv"==a.sender)this.last_sender=a.sender,this.admin_message(this.format_message(a));else if(!a.is_action&&this.last_sender&&this.last_sender==a.sender&&"jtv"!=this.last_sender)this.insert_with_lock("#chat_line_list li:last",'<p class="chat_line" style="display:block;">&raquo; '+this.format_message(a)+"</p>");else{this.last_sender=a.sender;var c="";a.image_url&&(c='<a href="#" id="profile-image-link-%linkid" onclick="return false;" class="chat_viewer_thumb left"><img src="/images/redesign/chat_type_jtv.png" class="type_overlay jtv" /><img src="'+a.image_url+'" class="thumb" /></a>');b="";if((PP.login===PP.channel||"true"===PP.is_admin||"true"===PP.is_subadmin||this.staff[PP.login]||this.admins[PP.login]||this.moderators[PP.login])&&"jtv"!=a.sender&&a.sender!=PP.login)b='<a name="timeout" class="mod_button timeout" onclick="CurrentChat.timeout(\'%nickname\'); return false;" title="%timeout_title"><img src="/images/xarth/g/g18_clock-00000080.png" alt="Timeout" /></a><a name="ban" class="mod_button ban" onclick="CurrentChat.ban(\'%nickname\'); return false;" title="%ban_title"><img src="/images/xarth/g/g18_ban-00000080.png" alt="Ban" /></a><a name="unban" class="mod_button unban" onclick="CurrentChat.unban(\'%nickname\'); return false;" style="display:none;" title="%unban_title"><img src="/images/xarth/g/g18_unban-00000080.png" alt="Unban" /></a>'.replace(/\%nickname/g,a.sender),b=b.replace(/\%timeout_title/g,h_(_("Timeout %{username}"),{username:a.sender}).replace(/\"/g,"")),b=b.replace(/\%ban_title/g,h_(_("Ban %{username}"),{username:a.sender}).replace(/\"/g,"")),b=b.replace(/\%unban_title/g,h_(_("Unban %{username}"),{username:a.sender}).replace(/\"/g,""));var d=a.is_action?'<li class="line jtv chat_from_%sender"><p style="color:%color">%timestamp%modbuttons<span class="nick">%displayname</span> <span class="chat_line" style="color:%color">%message</span></p></li>':'<li class="line jtv chat_from_%sender'+(c?" pic clearfix":"")+'">'+c+'<a onClick="var msg = $(\'chat_text_input\').value; $(\'chat_text_input\').value=(msg+\'@%sender, \'); $(\'chat_text_input\').focus()" class="chat-reply" title="Reply to: %sender"/></a><p>%timestamp%tag%modbuttons<a href="#" style="color:%color" class="nick" id="%linkid">%displayname</a>:&nbsp;<span class="chat_line">%message</span></p></li>';a.timestamp=this.history_ended&&!this.show_timestamps?"":'<span class="small">'+a.timestamp+"&nbsp;</span>";var g=!1,c=unescape(a.nickname);0==c.indexOf("ign-")&&(g=!0,c=c.substr(4));var e="";if(a.tagtype)var h,e='<span class="tag %tagtype" title="%tagname">%tagname</span>&nbsp;'.replace(/\%tagtype/g,a.tagtype).replace(/\%tagname/g,a.tagname);a.pro&&(e+='<span class="tag %tagtype" title="%tagname"><a href="http://justin.tv/payment/pro_account?utm_source=link&utm_medium=pro_link&utm_campaign=chat_badge">%tagname</a></span> '.replace(/\%tagtype/g,"pro").replace(/\%tagname/g,"Pro"));a.subscriber&&(h='<span class="tag %tagtype %tagchannel" title="%tagname"><a href="/'+this.channel+'/subscribe" target="_blank">%tagname</a></span> ',e+=h.replace(/\%tagtype/g,"subscriber").replace(/\%tagname/g,"Subscriber").replace(/\%tagchannel/g,this.channel));g&&(e+='<span class="tag %tagtype" title="%tagname">%tagname</span>&nbsp;'.replace(/\%tagtype/g,"ign").replace(/\%tagname/g,"My IGN"));g="chat-line-"+Math.round(1E9*Math.random());b=d.replace(/\%modbuttons/g,b);b=b.replace(/\%tag/g,e);b=b.replace(/\%sender/g,a.sender.replace(/\%/g,"_"));b=b.replace(/\%nickname/g,unescape(a.sender));b=b.replace(/\%displayname/g,c);b=b.replace(/\%timestamp/g,a.timestamp);b=b.replace(/\%message/g,this.format_message(a));b=b.replace(/\%color/g,a.color);b=b.replace(/\%linkid/g,g);!a.is_action&&"jtv"!=a.sender?this.insert_with_lock("#chat_line_list",b,a,g):this.insert_with_lock("#chat_line_list",b)}}};
+	} else {
+		CurrentChat.insert_chat_line = function(a){if(!(this.restarting&&!this.history_ended||"chattester10"==a.sender)){var b=$("broadcast_tabs_holder");b&&TabbedView(b).notifyTab("chat",{inc:1});if("jtv"==a.sender)this.last_sender=a.sender,this.admin_message(this.format_message(a));else if(!a.is_action&&this.last_sender&&this.last_sender==a.sender&&"jtv"!=this.last_sender)this.insert_with_lock("#chat_line_list li:last",'<p class="chat_line" style="display:block;">&raquo; '+this.format_message(a)+"</p>");else{this.last_sender=a.sender;var c="";a.image_url&&(c='<a href="#" id="profile-image-link-%linkid" onclick="return false;" class="chat_viewer_thumb left"><img src="/images/redesign/chat_type_jtv.png" class="type_overlay jtv" /><img src="'+a.image_url+'" class="thumb" /></a>');b="";if((PP.login===PP.channel||"true"===PP.is_admin||"true"===PP.is_subadmin||this.staff[PP.login]||this.admins[PP.login]||this.moderators[PP.login])&&"jtv"!=a.sender&&a.sender!=PP.login)b='<a name="timeout" class="mod_button timeout" onclick="CurrentChat.timeout(\'%nickname\'); return false;" title="%timeout_title"><img src="/images/xarth/g/g18_clock-00000080.png" alt="Timeout" /></a><a name="ban" class="mod_button ban" onclick="CurrentChat.ban(\'%nickname\'); return false;" title="%ban_title"><img src="/images/xarth/g/g18_ban-00000080.png" alt="Ban" /></a><a name="unban" class="mod_button unban" onclick="CurrentChat.unban(\'%nickname\'); return false;" style="display:none;" title="%unban_title"><img src="/images/xarth/g/g18_unban-00000080.png" alt="Unban" /></a>'.replace(/\%nickname/g,a.sender),b=b.replace(/\%timeout_title/g,h_(_("Timeout %{username}"),{username:a.sender}).replace(/\"/g,"")),b=b.replace(/\%ban_title/g,h_(_("Ban %{username}"),{username:a.sender}).replace(/\"/g,"")),b=b.replace(/\%unban_title/g,h_(_("Unban %{username}"),{username:a.sender}).replace(/\"/g,""));var d=a.is_action?'<li class="line jtv chat_from_%sender"><p style="color:%color">%timestamp%modbuttons<span class="nick">%displayname</span> <span class="chat_line" style="color:%color">%message</span></p></li>':'<li class="line jtv chat_from_%sender'+(c?" pic clearfix":"")+'">'+c+'<p>%timestamp%tag%modbuttons<a href="#" style="color:%color" class="nick" id="%linkid">%displayname</a>:&nbsp;<span class="chat_line">%message</span></p></li>';a.timestamp=this.history_ended&&!this.show_timestamps?"":'<span class="small">'+a.timestamp+"&nbsp;</span>";var g=!1,c=unescape(a.nickname);0==c.indexOf("ign-")&&(g=!0,c=c.substr(4));var e="";if(a.tagtype)var h,e='<span class="tag %tagtype" title="%tagname">%tagname</span>&nbsp;'.replace(/\%tagtype/g,a.tagtype).replace(/\%tagname/g,a.tagname);a.pro&&(e+='<span class="tag %tagtype" title="%tagname"><a href="http://justin.tv/payment/pro_account?utm_source=link&utm_medium=pro_link&utm_campaign=chat_badge">%tagname</a></span> '.replace(/\%tagtype/g,"pro").replace(/\%tagname/g,"Pro"));a.subscriber&&(h='<span class="tag %tagtype %tagchannel" title="%tagname"><a href="/'+this.channel+'/subscribe" target="_blank">%tagname</a></span> ',e+=h.replace(/\%tagtype/g,"subscriber").replace(/\%tagname/g,"Subscriber").replace(/\%tagchannel/g,this.channel));g&&(e+='<span class="tag %tagtype" title="%tagname">%tagname</span>&nbsp;'.replace(/\%tagtype/g,"ign").replace(/\%tagname/g,"My IGN"));g="chat-line-"+Math.round(1E9*Math.random());b=d.replace(/\%modbuttons/g,b);b=b.replace(/\%tag/g,e);b=b.replace(/\%sender/g,a.sender.replace(/\%/g,"_"));b=b.replace(/\%nickname/g,unescape(a.sender));b=b.replace(/\%displayname/g,c);b=b.replace(/\%timestamp/g,a.timestamp);b=b.replace(/\%message/g,this.format_message(a));b=b.replace(/\%color/g,a.color);b=b.replace(/\%linkid/g,g);!a.is_action&&"jtv"!=a.sender?this.insert_with_lock("#chat_line_list",b,a,g):this.insert_with_lock("#chat_line_list",b)}}};
+	}}
+	
+///////////////////////////////// DISPLAY MODES	
+	function channelcheck() {
+	if(channel == 1) {
+		jQuery('#related_channels').fadeOut(200);
+	} else {
+		jQuery('#related_channels').fadeIn(500);
+	}}	
+	
+	function tabcheck() {
+	if(tab == 1) {
+		jQuery('#archive_info_tabs, #archives, #about').animate({'opacity' : 0}).doTimeout(400, function() {jQuery(this).addClass('hidden')} );
+	} else {
+		jQuery('#archive_info_tabs, #archives, #about').animate({'opacity' : 1}).removeClass('hidden');		
+	}}	
+	
+	function tablimitcheck() {
+	if(tablimit == 1) {
+		jQuery('#archives, #about').css({'overflow-y': 'scroll !important', 'height': '378px' , 'width' : '627px'});
+	} else {
+		jQuery('#archives, #about').css({'overflow-y': '', 'height': 'auto' , 'width' : '610px'});;
+	}}
+	
+	function fbcheck() {
+	if(fb == 1) {
+		jQuery('#facebook_connect').fadeOut(200);
+		jQuery('#archive_info_tabs').css('margin-top', '20px');
+	} else {
+		jQuery('#facebook_connect').fadeIn(500);
+		jQuery('#archive_info_tabs').css('margin-top', 0);
+	}}
+	
+///////////////////////////////// LANGUAGE FIX - (CHANGE ONLY SIZES) - ONLY POLISH AT THE MOMENT
+	
+	function correctpl () {
+	jQuery('body').append("<style type='text/css'>#self_actions {width:271px !important;}"
+	+ "#self_actions .dropmenu_left { width: 150px !important; }"
+	+ "#create_account_div label, #login_div label { width: 115px !important; }"
+	+ "#create_account_div .text, #login_div .text  {width: 250px !important; }"
+	+ "</style>");
+	}
+	
+///////////////////////////////// AKTUALIZACJA 
+	function updatestreaminfo () {
+			oldpos = jQuery('#follow_and_filters').offset().top;
+			channelname = jQuery('#live_channel_name').text();
+		
+		//////////////// ZMIANA
+			jQuery('#broadcast_title').fadeTo(500, 0.33).load('/'+channelname+' #broadcast_title', function() {
+			jQuery(this).attr("id","broadcast_title-temp").fadeTo(500, 1);
+			newtitle = jQuery('#broadcast_title').text();
+			jQuery('#broadcast_title-temp').html(newtitle).attr("id","broadcast_title");
+			
+		//////////// WYS CHATU
+			newpos = jQuery('#follow_and_filters').offset().top; 
+			chatt = jQuery('#chat_lines').height();
+			
+			if	(newpos == oldpos) { return; }
+			else if (newpos > oldpos) { var calcpos = newpos-oldpos; chat = chat + calcpos; chatt = chatt + calcpos; } 
+			else { 	var calcpos = oldpos-newpos; chat = chat - calcpos; chatt = chatt - calcpos; }
+			jQuery('#chat_lines').css({'max-height' : chatt, 'height' : chatt})
+			});
+		
+		jQuery('#metagame').fadeTo(500, 0.33).load('/'+channelname+' #metagame', function() {
+		jQuery(this).attr("id","#metagame-temp").fadeTo(500, 1);
+		newtitle = jQuery('#metagame').text();
+		jQuery('#metagame-temp').html(newtitle).attr("id","#metagame");
+		});
+	}
+
+///////////////////////////////// PODSWIETLANIE
+	function highlight () {
+	
+		////////// USUWANIE
+		if(highldone == 1) { 
+			document.body.removeChild(highlon); 
+			if (nightm == 1) {document.body.removeChild(nighthighlight);}
+			hlcss = "";
+			nighthighlightst = "";
+		};
+		highldone = 1;
+		
+		////////// ARRAY
+		nicksplit = nicks.split(',');
+		nicklist = [];
+			
+		////////// MAKE LIST
+		
+		jQuery.each(nicksplit, function(nr, nick) { 
+			chatfr = ' .chat_from_' + nick + ' ';
+			nicklist.push(chatfr);
+		})
+		
+		////////// NORMAL
+		
+		hlcss = nicklist + " { background: rgba(0, 0, 0, 0.05); border-top: 1px solid rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 5px 0 0 0 !important; }";
+		highlon = document.createElement("style");
+		highlon.setAttribute("type", "text/css");
+		highlon.textContent = hlcss;
+		document.body.appendChild(highlon); 
+
+		////////// NIGHT
+		
+		nighthighlightst = nicklist + " { background: rgba(255, 255, 255, 0.075); border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 5px 0 0 0 !important; }";
+		nighthighlight = document.createElement("style");
+		nighthighlight.setAttribute("type", "text/css");
+		nighthighlight.textContent = nighthighlightst;
+		if (nightm == 1) { nighton(); }
+	}
+	
+	
+	
+///////////////////////////////// DZIA£ANIE ///////////////////////////////// 
+
+////////////// ALWAYS
+
+jQuery('#header_logo').append('<span id="twe-logo">Extended</span>');
+
+////////////// LITE
+
+if (!jQuery('body.channel').exists()) {
+
+	if (nightm == 1) { nightonlite(); }
+	if (nightmbg == 0) { nightbgon(); }
+	channelcheck();
+	tabcheck();
+	fbcheck();
+	
+	if(jQuery('body.archive.show').exists()) {tablimitcheck();}
+	if(jQuery('body.popout_chat').exists()) {replycheck();}
+	
+	if (jQuery('#stats_and_description').exists()){
+	jQuery('#stats_and_description').append('<div id="twex-panel"><div id="twex-panel-cont"><span id="twex-title">' +  TEXT_EXT_NAME + '</span>'
+	+ '<div id="twex-buttons"><a class="normal_button" id="night-m-b"><span>' +  TEXT_NIGHTM_B + '</span></a>'
+	+ '</div></div></div>');
+	} else { jQuery('#header_search').before('<a class="normal_button" style="margin-left: 10px;" id="night-m-b"><span>' +  TEXT_NIGHTM_B + '</span></a>');	}
+	
+	jQuery('#night-m-b').click(function () {
+		if(nightm == 0) {
+		nightonlite();
+		nightm = 1;
+	} else {
+		nightofflite();
+		nightm = 0;
+	}});
+	};
+	
+	if(jQuery('html').attr('lang') == 'pl') { correctpl(); }
+	
+	jQuery('.glyph_only img').css({'vertical-align': 'middle'});
+	
+////////////// FULL
+
+
+
+if (jQuery('body.channel').exists()) {
+
+
+	///////////////////////////////// BUTTONY 
+		
+	jQuery('#stats_and_description').append('<div id="twex-panel"><div id="twex-panel-cont"><span id="twex-title">' + TEXT_EXT_NAME + '</span>'
+	+ '<div id="twex-buttons"><a class="normal_button" id="title-refresh"><span>' + TEXT_REFRESH_B  + '</span></a>'
+	+ '<a class="normal_button" id="night-m-b"><span>' +  TEXT_NIGHTM_B + '</span></a>'
+	+ '<a class="normal_button" id="big-screen"><span>' +  TEXT_BIGSCREEN_B + '</span></a>'
+	+ '<a class="normal_button" id="big-toggle"><span>' +  TEXT_USERDISPLAY_B + '</span></a>'
+	+ '<a class="normal_button" id="tw-config"><span class="glyph_only"><img alt="' +  TEXT_TWE_IMG_ALT + '" src="http://www-cdn.jtvnw.net/images/xarth/g/g18_gear-00000080.png"></span></a>'
+	+ '</div></div></div><div style="clear: both;"></div>');
+
+	
+	jQuery('.glyph_only img').css({'vertical-align': 'middle'});
+	
+	highlight();
+	calcsize();
+	deletecheck();
+	channelcheck();
+	tabcheck();
+	fbcheck();
+	replycheck();
+	tablimitcheck();
+	
+	jQuery('#site_chat_flash').css({'position' : 'absolute', 'top' : '50', 'left' : '0', 'z-index' : '-55', 'visibility' : 'hidden'});
+	
+	jezyk = jQuery('html').attr('lang');
+	if(jezyk == 'pl') { correctpl(); }
+	jQuery('#title-refresh').click(function () { updatestreaminfo(); });
+
+////////////// NIGHT
+	
+	if (nightm == 1) { nighton(); }
+	if (nightmbg == 0) { nightbgon(); }
+	
+	jQuery('#night-m-b').click(function () {
+	if(nightm == 0) {
+		nighton();
+		nightm = 1;
+	} else {
+		nightoff();
+		nightm = 0;
+	}});
+		
+///////////////////////////////// USTAWIENIA ///////////////////////////////// 
+
+	jQuery('#tw-config').toggle(function () {
+		
+		jQuery('#stats_and_description').after(''
+		+ '<div id="config-div" class="bottomround" style="display: none"><p class="config-title">' +  TEXT_EXT_NAME + ' ' +  TEXT_EXT_VER + '</p>'
+/////////////////// DONATE
+		+ '<div id="twedonate">' +  TEXT_DONATE  + ''
+		+ '<div class="cright"><form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input type="hidden" name="cmd" value="_s-xclick"><input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYBeGLqY664SPNknNJgWlAYk1Z1RoaEo3fm7Wn+hHtke1P2txwnzoGpQ1XfLLhfZQW/FfwQZQ0xcBULXb6fALQf6WrtcRKnyme1yud+Ni2a+NeIAVQToEUvTbchUTisPipqZj/81Rcooe0g5t2/uA1tYoHdxCxkdsRVFlltRI0OF/zELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIB7mxvK0SriOAgZjH/oIA5JMESpXie63nFXetnnd1JD9tX64jOw5scOMi/aUnVwMiE0wfbaqCAVwpXIW2SWfAE7xySudHBHSYqrszEYDUvGtH+oxnIIlBmpR1FBAged1t5ZX9frNl5gIEBxidXs/WAZrZObK0pqR7m8q/vR2nk9n9hS5HqVtbPiuZJipdKa8m1wRmL6+y+6lSXZol/o5u6b+ckKCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTEyMTEwMzEyMDY1MlowIwYJKoZIhvcNAQkEMRYEFGR+V/cF28qUzcaJorErrnCJtCSSMA0GCSqGSIb3DQEBAQUABIGAvC9lGb1vJXhfpfYKFvx/hmN9BFqu05w+lF3S2QlTcHROBn84fHGBnW1Lhccg0m8OiQ6XRblA+93se/6MUjTm5IR3QE63QJ+s10UxXUUDEJGH+Y4N0oK/q9aG0acvRpbtahGU5N0xgZ7di2MOTYQ+AAWWPWsa39izSomJy5VyCUI=-----END PKCS7-----"><input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal ó The safer, easier way to pay online."><img alt="" border="0" src="https://www.paypalobjects.com/pl_PL/i/scr/pixel.gif" width="1" height="1"></form>'
+		+ '</div></div>'		
+/////////////////// NIGHT
+		+ '<p class="config-sub">' +  TEXT_NIGHTM_HEAD + '</p>'
+		+ '<p class="config-option">' +  TEXT_NIGHTM_TITLE + ' '
+		+ '<a class="switch cright" id="night-m"><span class="option1">ON</span><span class="option2">OFF</span><span id="night-slider" class="slider"></span></a></p>'
+/////////////////// NIGHT BG
+		+ '<p class="config-option margin">' +  TEXT_NIGHTM_BG + ' '
+		+ '<a class="switch cright" id="night-m-bg"><span class="option1">YES</span><span class="option2">NO</span><span id="night-slider-bg" class="slider"></span></a></p>'
+/////////////////// WIADOMOSCI
+		+ '<p class="config-sub">' +  TEXT_CHAT_HEAD + '</p>'
+		+ '<p class="config-option">' +  TEXT_CHAT_DELETED + ' '
+		+ '<a class="switch cright" id="deletem-button"><span class="option1">YES</span><span class="option2">NO</span><span id="deletem-slider" class="slider"></span></a></p>'
+/////////////////// ODPOWIEDè
+		+ '<p class="config-option">' +  TEXT_CHAT_REPLY + ' '
+		+ '<a class="switch cright" id="reply-button"><span class="option1">YES</span><span class="option2">NO</span><span id="reply-slider" class="slider"></span></a></p>'
+/////////////////// WYROZNIANIE
+		+ '<p class="config-option">' +  TEXT_CHAT_HIGHLIGHT + ''
+		+ '<div id="nicks-div"><input autocomplete="off" class="text leftround" id="nicks-list" placeholder="Input nicks here" type="text" value="'+nicks+'">'
+		+ '<button class="primary_button" id="nicks-apply" type="submit"><span>Apply</span></button></div>'
+/////////////////// UKRYWANIE POLECANE KANA£Y
+		+ '<p class="config-sub">' +  TEXT_DISP_HEAD + '</p>'
+		+ '<p class="config-option">' +  TEXT_DISP_SUGCHANN + ''
+		+ '<a class="switch cright" id="channels-button"><span class="option1">YES</span><span class="option2">NO</span><span id="channels-slider" class="slider"></span></a></p>'
+/////////////////// UKRYWANIE ZAKLADEK
+		+ '<p class="config-option">' +  TEXT_DISP_TABS + ''
+		+ '<a class="switch cright" id="tabs-button"><span class="option1">YES</span><span class="option2">NO</span><span id="tabs-slider" class="slider"></span></a></p>'
+/////////////////// ZAKLADKI ROZMIAR
+		+ '<p class="config-option margin">' +  TEXT_DISP_TABS_LIMIT + ''
+		+ '<a class="switch cright" id="tabheight"><span class="option1">YES</span><span class="option2">NO</span><span id="tabheight-slider" class="slider"></span></a></p>'
+/////////////////// UKRYWANIE FACEBOOKA
+		+ '<p class="config-option">' +  TEXT_DISP_FB + ' '
+		+ '<a class="switch cright" id="fb-button"><span class="option1">YES</span><span class="option2">NO</span><span id="fb-slider" class="slider"></span></a></p>'
+///////////////////  BIG SCREEN
+		+ '<p class="config-sub">' +  TEXT_BIGSCR_HEAD + '</p>'
+		+ '<p class="config-option">' +  TEXT_BIGSCR_CHATW + ''
+		+ '<span class="segmented_buttons cright"><button class="leftround primary_button" id="bschats-m"><span class="glyph_only">-</span></button>'
+		+ '<a class="normal_button"><span id="bschats">loading</span></a>'
+		+ '<button class="rightround primary_button" id="bschats-p"><span class="glyph_only">+</span></button></span></p>'
+///////////////////  ROZMIAR
+		+ '<p class="config-sub">' +  TEXT_USERD_HEAD + '</p>'
+		+ '<p class="config-option">' +  TEXT_USERD_FLASH + ''
+		+ '<span class="segmented_buttons cright"><button class="leftround primary_button" id="vsize-m"><span class="glyph_only">-</span></button>'
+		+ '<a class="normal_button"><span id="vsize">loading</span></a>'
+		+ '<button class="rightround primary_button" id="vsize-p"><span class="glyph_only">+</span></button></span></p>'
+///////////////////  SZEROKOSC CHATU
+		+ '<p class="config-option">' +  TEXT_USERD_CHATW + ''
+		+ '<span class="segmented_buttons cright"><button class="leftround primary_button" id="chats-m"><span class="glyph_only">-</span></button>'
+		+ '<a class="normal_button"><span id="chats">loading</span></a>'
+		+ '<button class="rightround primary_button" id="chats-p"><span class="glyph_only">+</span></button></span></p>'
+///////////////////  POZYCJA CHATU
+		+ '<p class="config-option">' +  TEXT_USERD_CHATPOS + ''
+		+ '<span class="segmented_buttons cright"><button class="leftround primary_button" id="chatright-m"><span class="glyph_only">-</span></button>'
+		+ '<a class="normal_button"><span id="chatr">loading</span></a>'
+		+ '<button class="rightround primary_button" id="chatright-p"><span class="glyph_only">+</span></button></span></p>'
+///////////////////  POZYCJA ODTWARZACZA
+		+ '<p class="config-option">' +  TEXT_USERD_FLASHPOS + ''
+		+ '<span class="segmented_buttons cright"><button class="leftround primary_button" id="playerleft-m"><span class="glyph_only">-</span></button>'
+		+ '<a class="normal_button"><span id="playerl">loading</span></a>'
+		+ '<button class="rightround primary_button" id="playerleft-p"><span class="glyph_only">+</span></button></span></p>'
+/////////////////// BUTTONY
+		+ '<p class="apply-clear"><a class="normal_button" id="apply"><span>' +  TEXT_CFG_APPLY + '</span></a><a class="normal_button" id="clear" style="float: right"><span>' +  TEXT_CFG_CLEAR_B + '</span></a></p>'
+		+ '</div>');
+		
+		
+		jQuery('#config-div').slideDown(400);
+		
+///////////////////////////////// STATUSY	
+	
+	jQuery('#vsize').html(mnoznik.toFixed(2));
+	jQuery('#chatr').html(chatright +'px');
+	jQuery('#playerl').html(playerleft +'px');
+	jQuery('#chats').html(chatsize +'px');
+	jQuery('#bschats').html(bigscreenchatsize +'px');
+	
+///////////////////////////////// NIGHTMODE
+
+	jQuery('#night-m').toggle(function () {
+		jQuery('#night-slider').css({'left' : 'auto', 'right' : '0'});
+		nighton();
+		nightm = 1;
+	}, function () {
+		jQuery('#night-slider').css({'left' : '0', 'right' : 'auto'});		
+		nightoff();
+		nightm = 0;
+	});
+	
+		if (nightm == 1) { jQuery('#night-m').trigger('click'); }
+		
+///////////////////////////////// NIGHTMODE BG
+
+	jQuery('#night-m-bg').toggle(function () {
+		jQuery('#night-slider-bg').css({'left' : 'auto', 'right' : '0'});
+		nightbgoff();
+		nightmbg = 1;
+		storage('nightmbg', 1);
+	}, function () {
+		jQuery('#night-slider-bg').css({'left' : '0', 'right' : 'auto'});		
+		nightbgon();
+		nightmbg = 0;
+		storage('nightmbg', 0);
+	});
+	
+		if (nightmbg == 1) { jQuery('#night-m-bg').trigger('click'); }
+
+///////////////////////////////// ANULOWANIE USUWANIA WIADOMOSCI
+
+	jQuery('#deletem-button').toggle(function () {
+		jQuery('#deletem-slider').css({'left' : 'auto', 'right' : '0'});
+		deletem = 1;
+		deletecheck();
+		storage('deletem', deletem);
+	}, function () {
+		jQuery('#deletem-slider').css({'left' : '0', 'right' : 'auto'});		
+		deletem = 0;
+		deletecheck();
+		storage('deletem', deletem);
+	});
+	
+		if (deletem == 1) { jQuery('#deletem-button').trigger('click'); }		
+		
+///////////////////////////////// SZYBKA ODPOWIEDZ
+
+	jQuery('#reply-button').toggle(function () {
+		jQuery('#reply-slider').css({'left' : 'auto', 'right' : '0'});
+		reply = 1;
+		replycheck();
+		storage('reply', reply);
+	}, function () {
+		jQuery('#reply-slider').css({'left' : '0', 'right' : 'auto'});		
+		reply = 0;
+		replycheck();
+		storage('reply', reply);
+	});
+	
+	
+		if (reply == 1) { jQuery('#reply-button').trigger('click'); }		
+
+///////////////////////////////// WYROZNIANIE
+		
+	jQuery('#nicks-apply').click(function () {
+		nicks = jQuery('#nicks-list').val();
+		storage('nicks',nicks);
+		highlight();
+	});
+	
+
+///////////////////////////////// SUGEROWANE KANA£Y
+
+	jQuery('#channels-button').toggle(function () {
+		jQuery('#channels-slider').css({'left' : 'auto', 'right' : '0'});
+		channel = 1;
+		channelcheck();
+		storage('channel', channel);
+	}, function () {
+		jQuery('#channels-slider').css({'left' : '0', 'right' : 'auto'});		
+		channel = 0;
+		channelcheck();
+		storage('channel', channel);
+	});
+	
+		if (channel == 1) { jQuery('#channels-button').trigger('click'); }	
+		
+///////////////////////////////// TABS
+
+	jQuery('#tabs-button').toggle(function () {
+		jQuery('#tabs-slider').css({'left' : 'auto', 'right' : '0'});
+		tab = 1;
+		tabcheck();
+		storage('tab', tab);
+	}, function () {
+		jQuery('#tabs-slider').css({'left' : '0', 'right' : 'auto'});		
+		tab = 0;
+		tabcheck();
+		storage('tab', tab);
+	});
+	
+		if (tab == 1) { jQuery('#tabs-button').trigger('click'); }		
+		
+///////////////////////////////// TABS SIZE
+
+	jQuery('#tabheight').toggle(function () {
+		jQuery('#tabheight-slider').css({'left' : 'auto', 'right' : '0'});
+		tablimit = 1;
+		tablimitcheck();
+		storage('tablimit', 1);
+	}, function () {
+		jQuery('#tabheight-slider').css({'left' : '0', 'right' : 'auto'});	
+		tablimit = 0;		
+		tablimitcheck();
+		storage('tablimit', 0);
+	});
+	
+		if (tablimit == 1) { jQuery('#tabheight').trigger('click'); }		
+		
+///////////////////////////////// FB
+
+	jQuery('#fb-button').toggle(function () {
+		jQuery('#fb-slider').css({'left' : 'auto', 'right' : '0'});
+		fb = 1;
+		fbcheck();
+		storage('fb', fb);
+	}, function () {
+		jQuery('#fb-slider').css({'left' : '0', 'right' : 'auto'});		
+		fb = 0;
+		fbcheck();
+		storage('fb', fb);
+	});
+	
+		if (fb == 1) { jQuery('#fb-button').trigger('click'); }	
+		
+///////////////////////////////// SZEROKOSC CHATU W BIG SCREEN
+	
+	jQuery('#bschats-p').click(function () {
+		bigscreenchatsize = bigscreenchatsize+10;
+		jQuery('#bschats').html(bigscreenchatsize+'px');
+		
+		storage('bigscreenchatsize', bigscreenchatsize);
+	});
+	
+	jQuery('#bschats-m').click(function () {
+		if(bigscreenchatsize == 100) {return}
+		bigscreenchatsize = bigscreenchatsize-10;
+		jQuery('#bschats').html(bigscreenchatsize+'px');
+		
+		storage('bigscreenchatsize', bigscreenchatsize);
+	});	
+	
+///////////////////////////////// ROZMIAR ODTWARZACZA
+	
+	jQuery('#vsize-p').click(function () {
+		mnoznik = mnoznik+0.05;
+		jQuery('#vsize').html(mnoznik.toFixed(2));
+		
+		storage('mnoznik', mnoznik);
+	});
+	
+	jQuery('#vsize-m').click(function () {
+		mnoznik = mnoznik-0.05;
+		jQuery('#vsize').html(mnoznik.toFixed(2));
+		
+		storage('mnoznik', mnoznik);
+	});
+	
+///////////////////////////////// SZEROKOSC CHATU
+	
+	jQuery('#chats-p').click(function () {
+		chatsize = chatsize+10;
+		jQuery('#chats').html(chatsize+'px');
+		
+		storage('chatsize', chatsize);
+	});
+	
+	jQuery('#chats-m').click(function () {
+		if(chatsize == 100) {return}
+		chatsize = chatsize-10;
+		jQuery('#chats').html(chatsize+'px');
+		
+		storage('chatsize', chatsize);
+	});
+
+
+///////////////////////////////// POZYCJE CHATU I ODTWARZACZA
+	
+	jQuery('#chatright-p').click(function () {
+		chatright = chatright+10;
+		jQuery('#chatr').html(chatright+'px');
+		storage('chatright', chatright);
+	});	
+	jQuery('#chatright-m').click(function () {
+		chatright = chatright-10;
+		jQuery('#chatr').html(chatright+'px');
+		storage('chatright', chatright);
+	});
+	
+	jQuery('#playerleft-p').click(function () {
+		playerleft = playerleft+10;
+		jQuery('#playerl').html(playerleft+'px');
+		storage('playerleft', playerleft);
+	});	
+	jQuery('#playerleft-m').click(function () {
+		playerleft = playerleft-10;
+		jQuery('#playerl').html(playerleft+'px');
+		storage('playerleft', playerleft);
+	});	
+	
+///////////////////////////////// AKTUALIZACJA USTAWIEN
+	
+	jQuery('#apply').click(function () {
+		calcsize();
+		if (big == 1) {
+		sizenormal();
+		jQuery.doTimeout(500, function () {
+		sizebig(); });
+		};
+	});	
+	
+///////////////////////////////// CZYSZCZENIE USTAWIEN
+	
+	jQuery('#clear').click(function () {
+	var alert=window.confirm(TEXT_CLEAR_Q)
+	if (alert) { localStorage.clear(); 	document.location.reload(true); } else { window.alert(TEXT_CLEAR_D); }
+	});
+	
+	
+	}, function () {
+		jQuery('#config-div').slideUp(400);		
+	});
+
+
+	
+///////////////////////////////// ZMIANA ROZMIARU	
+	
+	jQuery('#big-toggle').toggle(function () {
+		sizebig();
+		big = 1;
+	}, function () {
+		sizenormal();
+		big = 0;
+	});	
+
+///////////////////////////////// BIG SCREEN
+	
+	jQuery('#big-screen').toggle(function () {
+		bigscreenOn();
+		bigscreen = 1;
+	}, function () {
+		bigscreenOff();
+		bigscreen = 0;
+	});
+
+	
+	
+	
+	}
+
+	
+	
+	
+	/////END
+	}
+
+	
+	
 })(jQuery);	
