@@ -858,7 +858,7 @@ switch(jQuery('html').attr('lang')) {
 		+ "#chat_lines.bigscr {height: "+chatheight+"px !important; max-height: "+chatheight+"px !important;}"	
 		+ "#channel_viewer_count.bigscr {position: fixed; bottom: 5px; left: 150px; z-index: 150; opacity: 1 !important;}"
 		+ ".advertisement.bigscr { visibility: hidden; }"
-		+ "#live_site_player_flash.bigscr {width: "+playerwidth+"px !important; left: 0px";	
+		+ "#live_site_player_flash.bigscr {width: "+playerwidth+"px !important; left: 0px;}";	
 
 		if (bigscreencss == 0) { 
 		bigscreencss = document.createElement("style");
