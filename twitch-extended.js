@@ -105,7 +105,7 @@ switch(jQuery('html').attr('lang')) {
 			var TEXT_DISPLAY_TWEAK = "Ulepszenie dla niskich rozdzielczo&#347;ci";
 			var TEXT_DISPLAY_TWEAK_HOVER = "Zwi&#281;ksza rozmiar &#347;rodkowej kolumny";
 			
-			var TEXT_UPDATE_INFO = "Aktualizuj informacje o streamie";
+			var TEXT_UPDATE_INFO = "Aktualizuj opis";
 			var TEXT_UPDATE_INFO_HOVER = "B&#281;d&#261; aktualizowane co 1 minut&#281;";
 			
 			var TEXT_LOAD_ARCHIVE = "Za&#322;aduj archiwum";
