@@ -1,1 +1,1 @@
-$('#body-con').attr('background', "#000000");
+$('#body-con').attr('background', "#000000 !important");
