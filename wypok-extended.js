@@ -1,3 +1,1 @@
-alert('da');
-$('body').prepend('DUPA DAUDASDUASUDSADDSAHASUHDHUSAIDU AHSDUI ASHDUIA SHDUAISD');
-alert('da2');
+$('#body-con').attr('background', "#000000");
