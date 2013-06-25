@@ -1,2 +1,2 @@
-$('#body-con').attr('background', "#000000 !important");
-$('#header-con').attr('background', "#122532 !important");
+$('#body-con').css('background', "#000000 !important");
+$('#header-con').css('background', "#122532 !important");
