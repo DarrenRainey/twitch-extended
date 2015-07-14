@@ -1,0 +1,1 @@
+JavaScript extension for web browsers.
